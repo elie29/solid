@@ -2,7 +2,7 @@
 
 namespace App\DB;
 
-class DatabaseAccess implements DatabaseAccessInterface
+class DatabaseAccess implements GetReportDataInterface
 {
 
     public function getData()
@@ -14,33 +14,4 @@ class DatabaseAccess implements DatabaseAccessInterface
         );
     }
 
-    /**
-     * @codeCoverageIgnore
-     * {@inheritDoc}
-     * @see \App\Solid\Version4\DatabaseAccess::doQuery()
-     */
-    public function doQuery($criteria)
-    {
-        throw new \BadMethodCallException('doQuery not used');
-    }
-
-    /**
-     * @codeCoverageIgnore
-     * {@inheritDoc}
-     * @see \App\Solid\Version4\DatabaseAccess::savaData()
-     */
-    public function savaData(array $data)
-    {
-        throw new \BadMethodCallException('savaData not used');
-    }
-
-    /**
-     * @codeCoverageIgnore
-     * {@inheritDoc}
-     * @see \App\Solid\Version4\DatabaseAccess::deleteData()
-     */
-    public function deleteData(array $data)
-    {
-        throw new \BadMethodCallException('deleteData not used');
-    }
 }
