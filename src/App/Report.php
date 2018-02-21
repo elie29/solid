@@ -2,38 +2,38 @@
 
 namespace App;
 
-use App\DB\DatabaseAccess;
-use App\Formatter\ReportFormatter;
-use App\Printer\ReportPrinter;
+use App\DB\GetReportDataInterface;
+use App\Formatter\ReportFormatterInterface;
+use App\Printer\ReportPrinterInterface;
 
 class Report
 {
 
     /**
-     * @var DatabaseAccess
+     * @var GetReportDataInterface
      */
-    protected $databaseAccess;
+    protected $getReport;
 
     /**
-     * @var ReportFormatter
+     * @var ReportFormatterInterface
      */
     protected $reportFormatter;
 
     /**
-     * @var ReportPrinter
+     * @var ReportPrinterInterface
      */
     protected $reportPrinter;
 
-    public function __construct(DatabaseAccess $da, ReportFormatter $rf, ReportPrinter $rp)
+    public function __construct(GetReportDataInterface $gr, ReportFormatterInterface $rf, ReportPrinterInterface $rp)
     {
-        $this->databaseAccess = $da;
+        $this->getReport = $gr;
         $this->reportFormatter = $rf;
         $this->reportPrinter = $rp;
     }
 
     public function printAction()
     {
-        $data = $this->databaseAccess->getData();
+        $data = $this->getReport->getData();
         $formatedData = $this->reportFormatter->format($data);
         echo $this->reportPrinter->printOut($formatedData);
     }

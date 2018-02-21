@@ -2,7 +2,7 @@
 
 namespace App\Printer;
 
-class ReportPrinter implements ReportPrinterInterface
+class ReportLaserPrinter implements ReportPrinterInterface
 {
 
     public function printOut($data)

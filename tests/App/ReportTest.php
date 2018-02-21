@@ -3,6 +3,8 @@
 use App\DB\DatabaseAccess;
 use App\Formatter\ReportArrayFormatter;
 use App\Formatter\ReportFormatter;
+use App\Printer\ReportInkjetPrinter;
+use App\Printer\ReportLaserPrinter;
 use App\Printer\ReportPrinter;
 use PHPUnit\Framework\TestCase;
 
@@ -20,7 +22,7 @@ class ReportTest extends TestCase
         $report = new \App\Report(
             new DatabaseAccess,
             new ReportFormatter,
-            new ReportPrinter
+            new ReportLaserPrinter
         );
         $this->process($report);
     }
@@ -29,6 +31,19 @@ class ReportTest extends TestCase
      * Tests Report->printAction()
      */
     public function testPrintActionReportWithArrayFormatter()
+    {
+        $report = new \App\Report(
+            new DatabaseAccess,
+            new ReportArrayFormatter,
+            new ReportInkjetPrinter
+            );
+        $this->process($report);
+    }
+
+    /**
+     * Tests Report->printAction()
+     */
+    public function testPrintActionReportWithReportPrinter()
     {
         $report = new \App\Report(
             new DatabaseAccess,

@@ -2,7 +2,7 @@
 
 namespace App\Formatter;
 
-class ReportFormatter
+class ReportFormatter implements ReportFormatterInterface
 {
 
     /**
