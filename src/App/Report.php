@@ -2,40 +2,22 @@
 
 namespace App;
 
+use App\DB\DatabaseAccess;
+use App\Formatter\ReportFormatter;
+use App\Printer\ReportPrinter;
+
 class Report
 {
 
-    /**
-     * Report Class Responsibilities:
-     *  - Connecting to database and getting report data
-     *  - Formatting data
-     *  - Printing data on a laser printer
-     */
     public function printAction()
     {
-        $data = $this->getDataFromDababase();
+        $dataBase = new DatabaseAccess();
+        $data = $dataBase->getData();
 
-        $formatedData = $this->format($data);
+        $formatter = new ReportFormatter();
+        $formatedData = $formatter->format($data);
 
-        echo $this->laserPrint($formatedData);
-    }
-
-    protected function getDataFromDababase()
-    {
-        return array(
-            'name' => 'Report 1',
-            'description' => 'Just a report',
-            'content' => 'Lorem ipsum dolores'
-        );
-    }
-
-    protected function format(array $data)
-    {
-        return implode($data, "\n");
-    }
-
-    protected function laserPrint($data)
-    {
-        return "Printing data on laser printer\n" . $data;
+        $printer = new ReportPrinter();
+        echo $printer->printOut($formatedData);
     }
 }
