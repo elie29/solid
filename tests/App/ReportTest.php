@@ -1,5 +1,8 @@
 <?php
 
+use App\DB\DatabaseAccess;
+use App\Formatter\ReportFormatter;
+use App\Printer\ReportPrinter;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -13,7 +16,11 @@ class ReportTest extends TestCase
      */
     public function testPrintActionReport()
     {
-        $report = new \App\Report();
+        $report = new \App\Report(
+            new DatabaseAccess,
+            new ReportFormatter,
+            new ReportPrinter
+        );
         $this->process($report);
     }
 
